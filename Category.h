@@ -42,10 +42,39 @@ class Category{
         void addProduct(const Product& product){
             productLst.push_back(product);
         }
-        
-        //operator overloading
 
-}
+        //operator overloading 
+        bool operator < (const Category &c){
+            //const tells us we are just comparing, not accidentally modifying
+            if(categoryId<c.categoryId){
+                return true;
+            }
+            return false;
+        }
+
+        bool operator > (const Category &c){
+            //const tells us we are just comparing, not accidentally modifying
+            if(categoryId<c.categoryId){
+                return true;
+            }
+            return false;
+        }
+
+        bool operator==(const Category& c) const{
+            return (categoryId==c.categoryId) || (categoryName==c.categoryName);
+        }
+
+        //display
+        void displayProducts(){
+            cout<<"Category Id: "<<categoryId<<",Category: "<<categoryName<<endl;
+            for(auto& product:productLst){
+                cout<<"Product id: "<<product.getId()<<","
+                <<"Name: "<<product.getName()<<","
+                <<"Price: "<<product.getPrice()<<","
+                <<"Weight: "<<product.getWeight()<<endl;
+            }
+        }
+};
 
 
 #endif
