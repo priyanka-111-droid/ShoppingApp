@@ -25,7 +25,7 @@ class Category{
         :categoryId(categoryId), categoryName(categoryName), productLst(productLst),subcategories(subcategories){}
 
         //getter
-        int getCategoryid() {
+        int getCategoryId() {
             return categoryId;
         }
         string getCategoryName(){

@@ -7,20 +7,21 @@ using namespace std;
 
 template<class T>
 class CategoryBST{
+
     private:
         CategoryNode<T>* root;
         void insertHelper(CategoryNode<T>* &root,CategoryNode<T>* newNode);//for normal binary tree,use queue to insert, not insertHelper()
         void displayInorderHelper(CategoryNode<T>* &root,int level);
         void displayPreorderHelper(CategoryNode<T>* &root,int level);
         void displayPostorderHelper(CategoryNode<T>* &root,int level);
-        bool searchHelper(CategoryNode<T>* &root,int level);
+        bool searchHelper(CategoryNode<T>* &root,T data);
         int countHelper(CategoryNode<T>* &root);
         int countLeavesHelper(CategoryNode<T>* &root);
         int heightHelper(CategoryNode<T>* &root);
         CategoryNode<T>* deleteHelper(CategoryNode<T>* &root,T data);
         CategoryNode<T>* findInorderSuccessor(CategoryNode<T>* root);
-        void deleteTree(CategoryNode<T>* &root);//test using memory leak tools like Valgrind
-
+        void deleteTree(CategoryNode<T>* &root);//test using memory leak tools like Valgrind 
+        
     public:
         CategoryBST()//constructor
         :root(nullptr){}
@@ -93,7 +94,7 @@ void CategoryBST<T>::displayPostorderHelper(CategoryNode<T>* &root,int level){
 
 
 template<class T>
-bool CategoryBST<T>::searchHelper(CategoryNode<T>* &root,int level){
+bool CategoryBST<T>::searchHelper(CategoryNode<T>* &root,T data){
     if(root==nullptr){
         return false;
     }
@@ -166,8 +167,7 @@ CategoryNode<T>* CategoryBST<T>::deleteHelper(CategoryNode<T>* &root,T data){
         root->right = deleteHelper(root->right,data);//go right
     }else{
         if(root->data==data){
-            cout<<"Deleting: "<<root->data.getCategoryName()<<" or "
-            <<root->data.getCategoryId()<<endl;
+            cout<<"Deleting: "<<root->data.getCategoryName()<<" or "<<root->data.getCategoryId()<<endl;
 
             //case 1:No children(leaf node)
             if(root->left==nullptr && root->right==nullptr){
@@ -261,8 +261,6 @@ void CategoryBST<T>::deleteNode(T data){
     root = deleteHelper(root,data);
     return;
 }
-
-
 
 
 #endif
