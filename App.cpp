@@ -2,6 +2,8 @@
 #include "Category.h"
 #include "helper.h"
 #include "CategoryBST.h"
+#include "Inventory.h"
+#include "Cart.h"
 
 #include<iostream>
 #include<vector>
@@ -10,10 +12,53 @@
 #include<utility>//for pair
 using namespace std;
 
-vector<Category> categoryInventory = createCategoryInventory();
+vector<Category> categoryInventory = createCategoryInventory();//for admin
+vector<Product> mockInventory = createInventory();//user
 
 void user(){
+    cout<<"Welcome to Shopping App!"<<endl;
+    Inventory i(mockInventory);
+    Cart c;
 
+    while(true){
+        char ch;
+        cout<<"Press 'a' to add item, 'v' to view cart,'r' for grocery recommendation,'c' for checkout and 'e' to exit"<<endl;
+        cin>>ch;
+
+        switch(ch){
+            case 'a':
+                i.displayInventory();
+                c.pickFromInventory(i.getInventoryStock());
+                break;
+            case 'v':
+                c.viewCart();
+                break;
+            case 'c':
+            {
+                c.checkout();
+                string start;
+                cout<<"Enter destination for order pickup(Singapore,Berlin,New York,New Delhi,Paris)";
+                cin>>start;
+                string drop;
+                cout<<"Enter destination for order drop(Singapore,Berlin,New York,New Delhi,Paris)";
+                cin>>drop;
+                i.homeDelivery(start,drop);
+                break;
+            }
+            case 'r':
+                i.displayInventory();
+                double wt;
+                cout<<"Enter max weight of groceries you would like"<<endl;
+                cin>>wt;
+                cout<<i.recommendGroceriesUnderWeight(wt)<<endl;
+                break;
+            case 'e':
+                cout<<"Thank you for shopping!"<<endl;
+                return;
+            default:
+                cout<<"Press 'a','v','c','r','e' only"<<endl;
+        }
+    }
 }
 
 
@@ -43,13 +88,15 @@ void admin(){
 int main(){
     while(true){
         int choice;
-        cout<<"Enter 1 for admin,2 for user,3 to quit"<<endl;
+        cout<<"Enter 1 for user and 2 for admin and 3 to quit"<<endl;
         cin>>choice;
         switch(choice){
             case 1:
                 user();
+                break;
             case 2:
                 admin();
+                break;
             case 3:
                 cout<<"Exit"<<endl;
                 return -1;

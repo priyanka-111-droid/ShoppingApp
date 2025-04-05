@@ -66,30 +66,35 @@ template<class T>
 void CategoryBST<T>::displayInorderHelper(CategoryNode<T>* &root,int level){
     //L-node-R
     if(root==nullptr){
-        displayInorderHelper(root->left,level+1);
-        root->displayProducts();
-        displayInorderHelper(root->right,level+1);
+        return;
     }
+
+    displayInorderHelper(root->left,level+1);
+    root->data.displayProducts();
+    displayInorderHelper(root->right,level+1);
 }
 
 template<class T>
 void CategoryBST<T>::displayPreorderHelper(CategoryNode<T>* &root,int level){
     //node-L-R
     if(root==nullptr){
-        root->displayProducts();
-        displayPreorderHelper(root->left,level+1);
-        displayPreorderHelper(root->right,level+1);
+        return;
     }
+    root->data.displayProducts();
+    displayPreorderHelper(root->left,level+1);
+    displayPreorderHelper(root->right,level+1);
+    
 }
 
 template<class T>
 void CategoryBST<T>::displayPostorderHelper(CategoryNode<T>* &root,int level){
     //L-R-node
     if(root==nullptr){
-        displayPostorderHelper(root->left,level+1);
-        displayPostorderHelper(root->right,level+1);
-        root->displayProducts();
+        return;
     }
+    displayPostorderHelper(root->left,level+1);
+    displayPostorderHelper(root->right,level+1);
+    root->data.displayProducts();
 }
 
 

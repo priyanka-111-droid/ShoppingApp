@@ -11,8 +11,8 @@ class CategoryNode{
         CategoryNode()
         :data(0),left(nullptr),right(nullptr){}
 
-        CategoryNode(T data)
-        :data(data),left(nullptr),right(nullptr){}
+        CategoryNode(T d)
+        :data(d),left(nullptr),right(nullptr){}
 };
 
 
