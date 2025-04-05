@@ -1,2 +1,10 @@
 # ShoppingApp
-C++,data structures,algorithms,OOP 
+
+## Concepts used
+
+- C++
+- OOP
+- Data structures - Binary search trees, maps,Graphs
+- Algorithms - Dijkstra,Dynamic programming
+
+
